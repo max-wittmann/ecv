@@ -14,7 +14,7 @@ describe "StaticPages" do
   end
 
   describe "main page" do
-    before { visit '/' }
+    before { visit root_path }
 
     describe "should have default name (by default)" do
     it {should have_content("Default Name")}
