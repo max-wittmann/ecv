@@ -13,13 +13,28 @@ describe "StaticPages" do
     it {should have_selector(:id, 'footer')}
   end
 
-  describe "main page" do
-    before { visit root_path }
-
-    describe "should have default name (by default)" do
-    it {should have_content("Default Name")}
+  describe "basic pages" do
+    it "should have default name (by default)" do
+      visit home_path
+      should have_content("Default Name")
     end
-
+    it "should have about page with title" do
+      visit about_path
+      should have_title("About")
+    end
   end
 
+  #checkPageExists("about", about_path)
+
 end
+
+#private
+#def checkPageExists(name, path)
+#  describe "should have " + name + " page" do
+#    before { visit path }
+#
+#    describe "should have '" + name + "' title" do
+#      it {should have_title(name)}
+#    end
+#  end
+#end
