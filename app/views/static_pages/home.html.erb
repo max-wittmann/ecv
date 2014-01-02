@@ -40,3 +40,29 @@
             Content
         </p>
     </div>
+
+    <% sections = Section.all %>
+    <% sections.each do |c| %>
+        <div style="border: solid 1px black">
+        <h2><%= c.title %></h2>
+        <!--<%= c.inspect %>-->
+
+        <!--<%= SectionItem.all %>-->
+        <% #subsections = SectionItem.find_all_by_sectionid(c.id) %>
+        <% subsections = SectionItem.where(sectionid: c.id) %>
+        <% if subsections != nil %>
+            <% subsections.each do |subsection| %>
+                <div style="padding-left: 50px">
+                <h3><%= subsection.title %></h3>
+                <%= subsection.shortdescription %>
+                <!--<%= subsection.inspect %>-->
+                </div>
+            <% end %>
+        <% end %>
+        </div>
+    <% end %>
+
+    <!--<% sections = User.all %>-->
+    <!--<% sections.each do |c| %>-->
+        <!--<%= c.inspect %>-->
+    <!--<% end %>-->

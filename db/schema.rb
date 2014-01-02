@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102012739) do
+ActiveRecord::Schema.define(version: 20140102043623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "section_items", force: true do |t|
+    t.integer  "sectionid"
+    t.integer  "orderpos"
+    t.text     "shortdescription"
+    t.text     "longdescription"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sections", force: true do |t|
+    t.string   "title"
+    t.integer  "orderpos"
+    t.string   "name"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sections", ["id"], name: "index_sections_on_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
