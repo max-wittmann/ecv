@@ -1,68 +1,24 @@
-<% provide(:title, 'Default Name Curriculum Vitae') %>
-    <div class="jumbotron introduction">
-        <h1>About Default Name</h1>
-        <p class="lead">Default Name is a dedicated professional, a true hero, and a person of many mysteries.
-        He knows what he's talking about, and he talks about it well. That's why they call him 'da man'!</p>
-        <!--<p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>-->
-    </div>
-
-    <div class="education">
-        <h1>Education</h1>
-        <p>
-            Content
-        </p>
-    </div>
-
-    <div class="previous_experience">
-        <h1>Previous Experience</h1>
-        <p>
-            Content
-        </p>
-    </div>
-
-    <div class="projects">
-        <h1>Projects</h1>
-        <p>
-            Content
-        </p>
-    </div>
-
-    <div class="skills">
-        <h1>Skills</h1>
-        <p>
-            Content
-        </p>
-    </div>
-
-    <div class="references">
-        <h1>References</h1>
-        <p>
-            Content
-        </p>
-    </div>
-
-    <% sections = Section.all %>
+<% require 'assets/personaldata' %>
+<% #puts "Load path is " + $LOAD_PATH.to_s %>
+<% provide(:title, PersonalData::TITLE + " " + PersonalData::FIRSTNAME + " " + PersonalData::LASTNAME + ' Curriculum Vitae') %>
+    <% sections = Section.order(orderpos: :asc) %>
     <% sections.each do |c| %>
-        <div style="border: solid 1px black">
-        <h2><%= c.title %></h2>
-        <!--<%= c.inspect %>-->
-
-        <!--<%= SectionItem.all %>-->
-        <% #subsections = SectionItem.find_all_by_sectionid(c.id) %>
-        <% subsections = SectionItem.where(sectionid: c.id) %>
+        <div>
+        <% if c.title != nil %>
+            <h2><%= c.title %></h2>
+        <% end %>
+        <p>
+            <%= c.text.html_safe %>
+        </p>
+        <!--<% subsections = SectionItem.where(sectionid: c.id) %>-->
+        <% subsections = SectionItem.where(sectionid: c.id).order(orderpos: :asc) %>
         <% if subsections != nil %>
             <% subsections.each do |subsection| %>
                 <div style="padding-left: 50px">
                 <h3><%= subsection.title %></h3>
                 <%= subsection.shortdescription %>
-                <!--<%= subsection.inspect %>-->
                 </div>
             <% end %>
         <% end %>
         </div>
     <% end %>
-
-    <!--<% sections = User.all %>-->
-    <!--<% sections.each do |c| %>-->
-        <!--<%= c.inspect %>-->
-    <!--<% end %>-->
