@@ -1,0 +1,20 @@
+<% provide(:title, 'About Us') %>
+<% content_for :head do %>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+    <%= javascript_include_tag "prototype" %>
+
+    <style type="text/css">
+    </style>
+<% end %>
+
+<h1>What time is it?</h1>
+<div id="time_div">
+    I don't have the time, but
+    <%= link_to( "click here",
+                        :update => "time_div",
+                        :url =>{ :action => :say_when }, :remote => true) %>
+    and I will look it up.
+</div>

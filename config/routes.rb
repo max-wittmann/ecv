@@ -6,6 +6,8 @@ Ecv::Application.routes.draw do
 
   match '/home',    to: 'static_pages#home', via: 'get'
   match '/test',    to: 'static_pages#test', via: 'get'
+  match '/test2',    to: 'static_pages#test2', via: 'get'
+  match '/ajaxtest',    to: 'static_pages#ajaxtest', via: 'get'
   match '/about',    to: 'static_pages#about', via: 'get'
   match '/',    to: 'static_pages#home', via: 'get'
 

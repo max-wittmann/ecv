@@ -1,0 +1,222 @@
+<% provide(:title, 'About Us') %>
+<% content_for :head do %>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+
+    <style type="text/css">
+        #sortableSection { margin-left:50px;margin-top:20px; position:relative; }
+
+        /*.newStep {*/
+            /*cursor: pointer;*/
+            /*float: right;*/
+            /*font-size: 13px;*/
+            /*margin-bottom: 0 !important;*/
+            /*margin-left: 0 !important;*/
+            /*margin-right: -12px;*/
+            /*margin-top: 0 !important;*/
+            /*padding: 3px 7px;*/
+            /*width: 80px !important;*/
+        /*}*/
+        /*.step {*/
+            /*border-top-left-radius: 0 !important;*/
+            /*font-family: lucida Grande;*/
+            /*margin:4px;*/
+        /*}*/
+        /*.stepNum {*/
+            /*border-bottom-right-radius: 0;*/
+            /*border-top-right-radius: 0;*/
+            /*left: -20px;*/
+            /*padding: 8px;*/
+            /*position: absolute;*/
+            /*top: 3px;*/
+        /*}*/
+        .inset {
+            background: none repeat scroll 0 0 #E8E8E8;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: 0 0 3px #666666 inset;
+        }
+
+        .sectionItem td
+        {
+            padding: 3px;
+        }
+
+        .sectionItem {
+            padding: 5px;
+            border: 1px black solid;
+        }
+
+        .sectionTextArea
+        {
+            min-width: 500px;
+            width: 100%;
+            height: 100px;
+        }
+    </style>
+
+    <script>
+
+        function addSectionItem(parent)
+        {
+            console.log("Parent is " + parent);
+//            $(parent).parent().innerHTML += "Boo";
+            $(parent).parent().children('.sortableSection').append(createSectionItem());
+
+        }
+
+        function navigateThroughAllSections()
+        {
+
+
+            //console.log(jQuery.find("#sections")[0]);
+            //console.log($(jQuery.find("#sections")[0]).children('.section'));
+//            var sections = jQuery.find("#sections")[0];
+//            for(var section in $(sections).children('.section'))
+//            {
+//                //console.log($(section).find(".sectionItem"));
+//                for(var sectionItem in $(section).find(".sectionItem"))
+//                {
+//                    var title = $(section).find(".sTitle");
+//                    console.log($(title).text());
+//                }
+//            }
+
+            var sections = $(jQuery.find("#sections")[0]).find(".section");
+            console.log("Sections: " + sections)
+            for(var i = 0; i < sections.length; i++)
+//            for(var section in $(sections).find('.section'))
+            {
+                var section = sections[i];
+                console.log("Section: " + section)
+                var sectionItems = $(section).find(".sectionItem");
+                console.log("SectionItems: " + sectionItems);
+                for(var j = 0; j < sectionItems.length; j++)
+                {
+                    var sectionItem = sectionItems[j];
+                    console.log("SectionItem: " + sectionItem);
+                    var title = $(sectionItem).find(".sTitle");
+                    console.log("Title: " + title);
+                    console.log($(title).val());
+//                    console.log($(title).sShortDescription());
+
+                    console.log($(title).html());
+                    console.log($(title).text());
+                }
+            }
+        }
+
+        function createSectionItem()
+        {
+            return  '<div class="sectionItem">' +
+                    '<table>' +
+                    '<tr>' +
+                    '<td>Title</td>' +
+                    '<td><input class="sTitle sectionTextField" type="text"/></td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>Side Info</td>' +
+                    '<td><input class="sSideInfo sectionTextField" type="text"/></td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>Short Description</td>' +
+                    '<td><textarea class="sShortDescription sectionTextArea">Some text</textarea></td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td>Long Description</td>' +
+                    '<td><textarea class="sLongDescription sectionTextArea">Some text</textarea></td>' +
+                    '</tr>' +
+                    '</table>' +
+                    '</div>';
+        }
+
+        $(function(){
+
+            $('.sortableSection').sortable({placeholder: "ui-state-highlight",helper:'clone'});
+
+        })
+    </script>
+<% end %>
+
+<form id="sections">
+    <div class="section" id="section1">
+        <span onClick="addSectionItem(this)">Add</span>
+        <span onClick="navigateThroughAllSections()">Echo</span>
+        <div class="sortableSection">
+            <div class="sectionItem">
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input class="sTitle sectionTextField" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Side Info</td>
+                        <td><input class="sectionTextField" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Short Description</td>
+                        <td><textarea class="sectionTextArea">Some text</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Long Description</td>
+                        <td><textarea class="sectionTextArea">Some text</textarea></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="sectionItem">
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Side Info</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Short Description</td>
+                        <td><textarea>Some text</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Long Description</td>
+                        <td><textarea>Some text</textarea></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="sectionItem">
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Side Info</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td>Short Description</td>
+                        <td><textarea>Some text</textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Long Description</td>
+                        <td><textarea>Some text</textarea></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="position: relative;" class="sortable">
+                <span class="stepNum inset">4</span>
+                <textarea placeholder="Escribe que hay que hacer en este paso" class="step valid"></textarea>
+            </div>
+            <div style="position: relative;" class="sortable">
+                <span class="stepNum inset">4</span>
+                <textarea placeholder="Escribe que hay que hacer en este paso" class="step valid"></textarea>
+            </div>
+        </div>
+
+    </div>
+
+
+<!--<span onclick="crearPaso()" class="newStep fancyButton">+ insertar paso</span>-->
+
+</form>

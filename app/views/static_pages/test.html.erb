@@ -1,20 +1,89 @@
-<% provide(:title, 'Test') %>
+<% provide(:title, 'About Us') %>
 <% content_for :head do %>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
+
+    <style type="text/css">
+        .sectionItem
+        {
+            border: 1px black solid;
+            padding: 5px;
+            background-color: white;
+        }
+
+        .fieldContainer
+        {
+            width: 150px;
+        }
+
+        .divsortable
+        {
+            border: 1px black solid;
+        }
+
+        .description
+        {
+            width: 400px;
+            min-height: 200px;
+        }
+    </style>
 
     <script>
+//        function simpleItem()
+//        {
+//            return "<span>Element Being Dragged</span>";
+//        }
+
         $(function() {
             $( "#sortable" ).sortable({
                 revert: true
             });
+
             $( "#draggable" ).draggable({
                 connectToSortable: "#sortable",
                 helper: "clone",
                 revert: "invalid"
             });
+
+            $( ".divsortable ").sortable({
+                revert: true
+            });
+
+            $( ".divdraggable").sortable({
+                placeholder: "ui-state-highlight"
+            })
+
+            $( ".divdraggable2").draggable({
+                connectToSortable: ".divsortable",
+                connectWith: ".divsortable",
+                helper: "clone",
+                snapMode: 'inner',
+                revert: "invalid"
+            });
+
+            $ ( ".sectionItem").sortable({
+                connectToSortable: ".divsortable",
+                placeholder: "ui-state-highlight"
+            })
+
+            $ ( ".sectionItem2").draggable({
+//                snapMode: 'inner',
+                axis: "y",
+                connectToSortable: ".divsortable",
+                helper: "original"
+//                ,
+//                start: function( event, ui ) {
+//                    console.log("started dragging " + ui);
+//                }
+//                ,
+//                stop: function( event, ui)
+//                {
+//                    console.log("stopped dragging " + ui);
+//                }
+            });
+
             $( "ul, li" ).disableSelection();
         });
     </script>
@@ -64,4 +133,58 @@
         <li class="ui-state-default">Item 4</li>
         <li class="ui-state-default">Item 5</li>
     </ul>
+
+    <div class="divsortable">
+        <div class="sectionItem">
+            Item goes here A
+        </div>
+        <div class="sectionItem">
+            Item goes here B
+        </div>
+        <div class="sectionItem">
+            <div class="sectionItem">
+            <!--<div class="movingSectionItem">-->
+                <!--Being moved-->
+            <!--</div>-->
+            <!--<div class="nonMovingSectionItem">-->
+
+                    <!--<div>-->
+                        <!--<label class="fieldContainer">Title</label>-->
+                        <input type="text"/>
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<label class="fieldContainer">Sidebar</label>-->
+                        <!--<input type="text" id="sideInfo"/>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<label class="fieldContainer">Short Description</label>-->
+                        <!--<textarea class="description" id="shortDescription"></textarea>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<label class="fieldContainer">Long Description</label>-->
+                        <!--<textarea class="description" id="longDescription"></textarea>-->
+                    <!--</div>-->
+
+            <!--</div>-->
+            </div>
+        </div>
+        <div class="sectionItem">
+            Item goes here C
+        </div>
+        <div class="sectionItem">
+            Item goes here E<br/>
+            Item goes here E<br/>
+            Item goes here E<br/>
+            Item goes here E<br/>
+        </div>
+        <div class="sectionItem">
+            Item goes here D
+        </div>
+        <!--<div class="divdraggable">-->
+            <!--Second-->
+        <!--</div>-->
+        <!--<div class="divdraggable">-->
+            <!--Third-->
+        <!--</div>-->
+    </div>
 </div>

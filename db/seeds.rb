@@ -1,3 +1,5 @@
+require 'assets/personaldata'
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -10,7 +12,7 @@ User.create(name: 'admin', password: 'admin', email: 'admin@admin.com')
 
 introduction = Section.create(name: 'introduction', orderpos: 0, text: '
     <div class="jumbotron introduction">
-        <h1>About Default Name</h1>
+        <h1>About ' + PersonalData::FIRSTNAME + " " + PersonalData::LASTNAME + '</h1>
         <p class="lead">Default Name is a dedicated professional, a true hero, and a person of many mysteries.
         He knows what he\'s talking about, and he talks about it well. That\'s why they call him \'da man\'!</p>
     </div>')
